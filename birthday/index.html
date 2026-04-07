@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
+        body{background:#fdf6f8}
+        .page1{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center}
+        .modal{background:#fff;padding:30px;border-radius:16px;text-align:center}
+        .modal h2{color:#e63946;margin-bottom:20px}
+        #pwd{padding:10px;width:180px;border-radius:8px;border:1px solid #ccc;text-align:center}
+        .tip{font-size:12px;color:#666;margin:6px 0 16px}
+        .btn{display:flex;gap:10px;justify-content:center}
+        button{padding:8px 16px;border:none;border-radius:8px;cursor:pointer}
+        #confirm{background:#e63946;color:#fff}
+        .page2{width:100%;height:100vh;background:linear-gradient(#ffd6e0,#fef2f7);display:none;flex-direction:column;align-items:center;justify-content:center;position:relative}
+        .cake{width:180px;height:160px;animation:up 1s forwards .5s;opacity:0}
+        .cake::before{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:140px;height:70px;background:#f8b5c7;border-radius:8px 8px 0 0}
+        .cake::after{content:"";position:absolute;bottom:70px;left:50%;transform:translateX(-50%);width:100px;height:60px;background:#ffc2d1;border-radius:8px 8px 0 0}
+        .huoyan{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:12px;height:18px;background:#ff9f1c;border-radius:50%;animation:shuo .6s infinite alternate}
+        @keyframes shuo{from{opacity:.8}to{opacity:1;transform:translateX(-50%) scale(1.1)}}
+        @keyframes up{to{opacity:1;transform:translateY(0)}}
+        .hb{font-size:32px;font-weight:bold;color:#e63946;margin-top:20px;opacity:0;animation:xian 1.2s forwards 1.2s}
+        .name{font-size:22px;color:#c1121f;margin-top:10px;opacity:0;animation:xian 1.2s forwards 1.8s}
+        @keyframes xian{to{opacity:1}}
+        .star{position:absolute;color:#fff;font-size:22px;animation:shan 2s infinite alternate;opacity:0}
+        .s1{top:10%;left:20%}
+        .s2{top:15%;right:25%}
+        .s3{bottom:20%;left:15%}
+        .s4{bottom:15%;right:20%}
+        @keyframes shan{to{opacity:1}}
+        .page3{width:100%;min-height:100vh;background:#fff7f9;display:none;padding:30px;align-items:center;justify-content:center}
+        .card{background:#fff;padding:30px;border-radius:20px;box-shadow:0 0 20px rgba(0,0,0,0.1);border:2px solid #ffc2d1;line-height:1.9;font-size:16px}
+        .card p{opacity:0;margin:10px 0}
+        .right{text-align:right;margin-top:20px}
+    </style>
+</head>
+
+<body>
+    <div class="page1" id="p1">
+        <div class="modal">
+            <h2>生日快乐</h2>
+            <input type="text" id="pwd" placeholder="请输入生日密码" maxlength="4">
+            <div class="tip">提示：生日日期 0101</div>
+            <div class="btn">
+                <button id="confirm">确定</button>
+                <button id="cancel">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page2" id="p2">
+        <div class="star s1">✨</div>
+        <div class="star s2">✨</div>
+        <div class="star s3">🎀</div>
+        <div class="star s4">✨</div>
+        <div class="cake"><div class="huoyan"></div></div>
+        <div class="hb">HAPPY BIRTHDAY</div>
+        <div class="name">文彬</div>
+    </div>
+
+    <div class="page3" id="p3">
+        <div class="card">
+            <p>TO 文彬</p>
+            <p>✨✨🎂生日快乐🥳✨✨</p>
+            <p>感谢你为嘉一教育付出的每一天，今天请把时间留给自己。</p>
+            <p>带薪休假一天，请放心去放松，安心享受你的专属假期。</p>
+            <p>愿你新的一岁，工作顺心，生活温暖，快乐常伴。</p>
+            <p class="right">—— 嘉一教育</p>
+        </div>
+    </div>
+
+<script>
+    const p1 = document.getElementById('p1')
+    const p2 = document.getElementById('p2')
+    const p3 = document.getElementById('p3')
+    const pwd = document.getElementById('pwd')
+
+    document.getElementById('confirm').onclick = function(){
+        if(pwd.value === '0408'){
+            p1.style.display = 'none'
+            p2.style.display = 'flex'
+        }else{
+            alert('密码不正确哦')
+        }
+    }
+    document.getElementById('cancel').onclick = function(){
+        pwd.value = ''
+    }
+    p2.onclick = function(){
+        p2.style.display = 'none'
+        p3.style.display = 'flex'
+        const ps = document.querySelectorAll('.card p')
+        ps.forEach((p,i)=>{
+            setTimeout(()=>{
+                p.style.animation = 'xian 1s forwards'
+            },i*300)
+        })
+    }
+</script>
+</body>
+</html>
